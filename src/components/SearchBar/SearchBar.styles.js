@@ -12,12 +12,12 @@ export const Container = styled.div`
 export const Content = styled.div`
     position: relative;
     max-width: 1280px;
-    width: 100%;
+    width: 50%;
     height: 55px;
     background: #353535;
     margin: 0 auto;
     border-radius: 40px;
-    color: var(--white);
+    color: #fff;
 
     img {
         position: absolute;

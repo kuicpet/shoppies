@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from './components/AddToFavorites/Favourites.styles';
 
 // components
 import Grid from './components/Grid';
@@ -16,6 +17,7 @@ const Home = () => {
     const [error, setError] = useState(false);
     const [query, setQuery] = useState("");
     const [movies, setMovies] = useState([]);
+    const [favorites, setFavorites] = useState([]);
 
     const searchMovies = async (query) => {
         try {
@@ -37,23 +39,30 @@ const Home = () => {
         }
     };
 
+    const handleAddFavorites = (movie) => {
+        const favoritesList = [...favorites, movie];
+        setFavorites(favoritesList);
+    }
+
     useEffect(() => {
         searchMovies(query)
     },[query]);
     
     
-    if(error) return <div>Something went wrong!</div>
+    if(error) return <Container>Something went wrong!</Container>
 
     return (
         <React.Fragment>
             <SearchBar query={query} setQuery={setQuery} />
             <Grid>
                 {movies.map((item) => (
-                    <Content>
-                       <Image src={item.Poster} />
+                    <Content key={item.imdbID}>
+                       {item.Poster ? (<Image src={item.Poster} />) : (<Spinner/>)}
+                       <button onClick={handleAddFavorites}>Add to favorites</button>
                     </Content>
                 ))}
             </Grid>
+           {loading && <Spinner/>}
         </React.Fragment>
     )
 }
