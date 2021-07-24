@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from 'react'
+// components
+import Grid from './components/Grid';
 import SearchBar from './components/SearchBar'
-import { API_KEY, API_URL } from './config';
+import Spinner from './components/Spinner';
+
+import { useMovieFetch } from './useMovieFetch';
+
+
+
 
 const Home = () => {
-    const [query, setQuery] = useState('');
-    const [error, setError] = useState(false);
+    const { state, loading, error, setQuery, query } = useMovieFetch()
+    console.log("state", state);
 
-    const getMovies = async (query) => {
-        try {
-            setError(false);
-            
-            const url = `${API_URL}?s=${query}&apikey=${API_KEY}`;
-            const movies = await (await fetch(url)).json();
-            
-            console.log(movies)
-        } catch (error) {
-            setError(true);
-        }
-    };
-
-    useEffect(() => {
-        getMovies(query)
-    },[query])
 
     return (
         <React.Fragment>
-            <SearchBar query={query} setQuery={setQuery} />
+            <SearchBar setQuery={setQuery} />
+            <Grid></Grid>
+            {loading && <Spinner/>}
         </React.Fragment>
     )
 }
