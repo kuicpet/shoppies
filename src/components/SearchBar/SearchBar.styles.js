@@ -12,7 +12,7 @@ export const Container = styled.div`
 export const Content = styled.div`
     position: relative;
     max-width: 1280px;
-    width: 50%;
+    width: 100%;
     height: 55px;
     background: #353535;
     margin: 0 auto;
@@ -27,7 +27,7 @@ export const Content = styled.div`
     }
 
     input {
-        font-size: var(--fontlarge);
+        font-size: 1.2rem;
         position: absolute;
         left: 0;
         margin: 8px 0;
@@ -41,5 +41,6 @@ export const Content = styled.div`
         :focus {
             outline: none;
         }
+
     }
 `;
