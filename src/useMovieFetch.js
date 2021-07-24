@@ -22,11 +22,9 @@ export const useMovieFetch = () => {
 
             const movies = await API.searchMovies(query);
             //console.log("movies" ,movies);
-
-            setState(prev => ({
-                ...movies,
-                
-            }))
+            setState({
+               ...movies,
+            })
 
         } catch (error) {
             setError(true)
@@ -35,11 +33,11 @@ export const useMovieFetch = () => {
         setLoading(false);
     };
 
-    console.log(state)
+    //console.log(state)
 
     useEffect(() => {
         setState(InitialState);
-        getMovies(query)
+        getMovies(query);
     }, [query]);
 
     return { state, loading, error, setQuery, query  }

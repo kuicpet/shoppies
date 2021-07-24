@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react' 
 // components
 import Grid from './components/Grid';
 import SearchBar from './components/SearchBar'
@@ -13,11 +13,14 @@ const Home = () => {
     const { state, loading, error, setQuery, query } = useMovieFetch()
     console.log("state", state);
 
+    if(error) return <div>Something went wrong!</div>
 
     return (
         <React.Fragment>
             <SearchBar setQuery={setQuery} />
-            <Grid></Grid>
+            <Grid>
+              
+            </Grid>
             {loading && <Spinner/>}
         </React.Fragment>
     )
