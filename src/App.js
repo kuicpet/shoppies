@@ -7,6 +7,7 @@ import { GlobalStyle } from './Globalstyles';
 import Home from './Home';
 
 
+
 const App = () => {
 
   return (

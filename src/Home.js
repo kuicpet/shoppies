@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-//import { toast } from 'react-toastify';
-//import 'react-toastify/dist/react-toastify.esm';
 import { Container } from './components/AddToFavorites/Favourites.styles';
 
 // components
@@ -12,7 +10,6 @@ import Spinner from './components/Spinner';
 // API
 import { API_KEY, API_URL } from './config';
 
-// Icons
 
 
 const Home = () => {
@@ -23,7 +20,6 @@ const Home = () => {
     const [favorites, setFavorites] = useState([]);
     const [message, setMessage] = useState(false);
 
-    //toast.configure();
 
     const searchMovies = async (query) => {
         try {
@@ -66,7 +62,6 @@ const Home = () => {
         //console.log("added");
         //console.log(favoritesList);
        if(favoritesList.length > 5){
-           //toast.warning("Maximum of 5 movies allowed", {position: toast.POSITION.TOP_RIGHT, autoClose: 3000 })
            setMessage(message);
            return;
        }
@@ -104,16 +99,17 @@ const Home = () => {
             <Grid heading ="Movies" >
                 {movies.map((item) => (
                     <Content key={item.imdbID}>
-                       <Image 
-                        src={item.Poster} 
-                        alt=""
-                        />
-                      <Container>
+                            <Image 
+                                src={item.Poster} 
+                                alt=""
+                            />
                         <button
                              onClick={() => handleAddFavorites(item)}
                             className="overlay">
                             Add to Favorites
                         </button >
+                      <Container>
+                       
                       </Container>
                     </Content>
                 ))}
