@@ -114,7 +114,7 @@ const Home = () => {
             </Grid>
            <Grid heading ="Favorites">
                {favorites.map((item) => (
-                   <Content>
+                   <Content key={item.imdbID}>
                        <Image 
                         src={item.Poster} 
                         onClick={() => handleRemoveFavorites(item)}
