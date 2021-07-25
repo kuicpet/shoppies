@@ -46,6 +46,15 @@ const Home = () => {
         setFavorites(favoritesList);
     }
 
+    const handleRemoveFavorites = (movie) => {
+        const favoritesList = favorites.filter(
+            (favorite) => favorite.imdbID !== movie.imdbID
+        );
+        console.log("removed");
+        console.log(favoritesList);
+        setFavorites(favoritesList);
+    }
+
     useEffect(() => {
         searchMovies(query)
     },[query]);
@@ -59,14 +68,21 @@ const Home = () => {
             <Grid heading ="Movies" >
                 {movies.map((item) => (
                     <Content key={item.imdbID}>
-                       <Image src={item.Poster} onClick={() => handleAddFavorites(item)}/>
+                       <Image 
+                        src={item.Poster} 
+                        onClick={() => handleAddFavorites(item)}
+                        alt=""
+                        />
                     </Content>
                 ))}
             </Grid>
            <Grid heading ="Favorites">
                {favorites.map((item) => (
                    <Content>
-                       <Image src={item.Poster} alt="" />
+                       <Image 
+                        src={item.Poster} 
+                        onClick={() => handleRemoveFavorites(item)}
+                        alt="" />
                    </Content>
                ))}
            </Grid>
