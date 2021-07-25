@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+//import { toast } from 'react-toastify';
+//import 'react-toastify/dist/react-toastify.esm';
 import { Container } from './components/AddToFavorites/Favourites.styles';
 
 // components
@@ -21,6 +23,8 @@ const Home = () => {
     const [favorites, setFavorites] = useState([]);
     const [message, setMessage] = useState(false);
 
+    //toast.configure();
+
     const searchMovies = async (query) => {
         try {
             setError(false);
@@ -30,7 +34,7 @@ const Home = () => {
             const res = await fetch(url);
             const movies = await res.json();
 
-            console.log(movies.Search);
+            // console.log(movies.Search);
 
             if(movies.Search){
                 setTimeout(() => {
@@ -59,9 +63,10 @@ const Home = () => {
     // add to favorites
     const handleAddFavorites = (movie) => {
         const favoritesList = [...favorites, movie];
-        console.log("added");
-        console.log(favoritesList);
+        //console.log("added");
+        //console.log(favoritesList);
        if(favoritesList.length > 5){
+           //toast.warning("Maximum of 5 movies allowed", {position: toast.POSITION.TOP_RIGHT, autoClose: 3000 })
            setMessage(message);
            return;
        }
@@ -74,8 +79,8 @@ const Home = () => {
         const favoritesList = favorites.filter(
             (favorite) => favorite.imdbID !== movie.imdbID
         );
-        console.log("removed");
-        console.log(favoritesList);
+        //console.log("removed");
+        //console.log(favoritesList);
         setFavorites(favoritesList);
     }
 
@@ -85,12 +90,17 @@ const Home = () => {
     },[query]);
     
     
-    if(error) return <Container>Something went wrong!</Container>
+    if(error) return (
+        <Container>
+            Something went wrong
+        </Container>
+    )
     {loading  && <Spinner/>}
 
     return (
         <React.Fragment>
             <SearchBar query={query} setQuery={setQuery} />
+            {message && (<Container>Maximum of 5 movies allowed</Container>)}
             <Grid heading ="Movies" >
                 {movies.map((item) => (
                     <Content key={item.imdbID}>
@@ -103,7 +113,6 @@ const Home = () => {
                 ))}
             </Grid>
            <Grid heading ="Favorites">
-               {message && <Container>Maximum of 5 movies allowed!</Container>}
                {favorites.map((item) => (
                    <Content>
                        <Image 
