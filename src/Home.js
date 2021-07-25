@@ -106,9 +106,15 @@ const Home = () => {
                     <Content key={item.imdbID}>
                        <Image 
                         src={item.Poster} 
-                        onClick={() => handleAddFavorites(item)}
                         alt=""
                         />
+                      <Container>
+                        <button
+                             onClick={() => handleAddFavorites(item)}
+                            className="overlay">
+                            Add to Favorites
+                        </button >
+                      </Container>
                     </Content>
                 ))}
             </Grid>
@@ -116,9 +122,15 @@ const Home = () => {
                {favorites.map((item) => (
                    <Content key={item.imdbID}>
                        <Image 
-                        src={item.Poster} 
-                        onClick={() => handleRemoveFavorites(item)}
-                        alt="" />
+                          src={item.Poster} 
+                          alt="" />
+                        <Container>
+                            <button
+                                onClick={() => handleRemoveFavorites(item)}
+                                className="overlay">
+                                Remove
+                            </button >
+                        </Container>
                    </Content>
                ))}
            </Grid>
