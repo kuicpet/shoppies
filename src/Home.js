@@ -33,7 +33,9 @@ const Home = () => {
             console.log(movies.Search);
 
             if(movies.Search){
-                setMovies(movies.Search)
+                setTimeout(() => {
+                    setMovies(movies.Search);
+                }, 500);
             };
 
         } catch (error) {
@@ -77,20 +79,20 @@ const Home = () => {
         setFavorites(favoritesList);
     }
 
+    // search saved to state
     useEffect(() => {
         searchMovies(query)
     },[query]);
     
     
     if(error) return <Container>Something went wrong!</Container>
-    
+    {loading  && <Spinner/>}
 
     return (
         <React.Fragment>
             <SearchBar query={query} setQuery={setQuery} />
             <Grid heading ="Movies" >
                 {movies.map((item) => (
-                    <>
                     <Content key={item.imdbID}>
                        <Image 
                         src={item.Poster} 
@@ -98,7 +100,6 @@ const Home = () => {
                         alt=""
                         />
                     </Content>
-                    </>
                 ))}
             </Grid>
            <Grid heading ="Favorites">
@@ -112,6 +113,7 @@ const Home = () => {
                    </Content>
                ))}
            </Grid>
+          
         </React.Fragment>
     )
 }

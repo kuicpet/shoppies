@@ -28,6 +28,6 @@ export const Image = styled.img`
     transition: all 0.3s;
 
     :hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 `;
