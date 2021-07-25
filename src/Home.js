@@ -10,6 +10,7 @@ import Spinner from './components/Spinner';
 // API
 import { API_KEY, API_URL } from './config';
 
+// Icons
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
     const [query, setQuery] = useState("");
     const [movies, setMovies] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [message, setMessage] = useState(false);
 
     const searchMovies = async (query) => {
         try {
@@ -39,13 +41,33 @@ const Home = () => {
         }
     };
 
+    // retreive from localstorage
+    useEffect(() => {
+        const movieFavorites = JSON.parse(
+            localStorage.getItem("favorites")
+        );
+        setFavorites(movieFavorites);
+    }, [])
+
+    // save to localstorage
+    const saveToLocalStorage = (items) => {
+        localStorage.setItem("favorites", JSON.stringify(items))
+    }
+
+    // add to favorites
     const handleAddFavorites = (movie) => {
         const favoritesList = [...favorites, movie];
         console.log("added");
         console.log(favoritesList);
+       if(favoritesList.length > 5){
+           setMessage(message);
+           return;
+       }
         setFavorites(favoritesList);
+        saveToLocalStorage(favoritesList);
     }
 
+    // remove from favorites
     const handleRemoveFavorites = (movie) => {
         const favoritesList = favorites.filter(
             (favorite) => favorite.imdbID !== movie.imdbID
@@ -61,12 +83,14 @@ const Home = () => {
     
     
     if(error) return <Container>Something went wrong!</Container>
+    
 
     return (
         <React.Fragment>
             <SearchBar query={query} setQuery={setQuery} />
             <Grid heading ="Movies" >
                 {movies.map((item) => (
+                    <>
                     <Content key={item.imdbID}>
                        <Image 
                         src={item.Poster} 
@@ -74,9 +98,11 @@ const Home = () => {
                         alt=""
                         />
                     </Content>
+                    </>
                 ))}
             </Grid>
            <Grid heading ="Favorites">
+               {message && <Container>Maximum of 5 movies allowed!</Container>}
                {favorites.map((item) => (
                    <Content>
                        <Image 

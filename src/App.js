@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // components
 import Header from './components/Header';
+import { GlobalStyle } from './Globalstyles';
 import Home from './Home';
 
 
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
         </Switch>
       </Router>
+      <GlobalStyle/>
     </React.Fragment>
   )
 }
