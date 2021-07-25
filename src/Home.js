@@ -41,6 +41,8 @@ const Home = () => {
 
     const handleAddFavorites = (movie) => {
         const favoritesList = [...favorites, movie];
+        console.log("added");
+        console.log(favoritesList);
         setFavorites(favoritesList);
     }
 
@@ -54,15 +56,20 @@ const Home = () => {
     return (
         <React.Fragment>
             <SearchBar query={query} setQuery={setQuery} />
-            <Grid>
+            <Grid heading ="Movies" >
                 {movies.map((item) => (
                     <Content key={item.imdbID}>
-                       {item.Poster ? (<Image src={item.Poster} />) : (<Spinner/>)}
-                       <button onClick={handleAddFavorites}>Add to favorites</button>
+                       <Image src={item.Poster} onClick={() => handleAddFavorites(item)}/>
                     </Content>
                 ))}
             </Grid>
-           {loading && <Spinner/>}
+           <Grid heading ="Favorites">
+               {favorites.map((item) => (
+                   <Content>
+                       <Image src={item.Poster} alt="" />
+                   </Content>
+               ))}
+           </Grid>
         </React.Fragment>
     )
 }

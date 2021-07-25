@@ -4,7 +4,10 @@ export const Container = styled.div`
     max-width: 1280px;
     margin: 20px;
     padding: 0 20px;
-
+    h1 {
+        font-size: 2rem;
+        font-weight: 100;
+    }
 `;
 
 export const Content = styled.div`
@@ -19,20 +22,6 @@ export const Image = styled.img`
     transition: all 0.3s;
     border-radius: 20px;
     object-fit: cover;
-    animation: animateThumbnail 0.5s;
     cursor: pointer;
     height: 100%;
-
-    :hover {
-        opacity: 0.8;
-    }
-
-    @keyframes animateThumbnail {
-        from {
-            opacity: 0
-        }
-        to {
-            opacity: 1;
-        }
-    }
 `;

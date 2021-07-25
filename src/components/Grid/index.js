@@ -1,9 +1,12 @@
 import React from "react";
 import { Container, Content } from "./Grid.styles";
 
-const MovieList = ({children}) => (
+const MovieList = ({heading,children}) => (
     <Container>
-        <Content>{children}</Content>
+        <h1>{heading}</h1>
+        <Content>
+            {children}
+        </Content>
     </Container>
 );
 
