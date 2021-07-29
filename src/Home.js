@@ -87,10 +87,10 @@ const Home = () => {
     
     if(error) return (
         <Container>
-            Something went wrong
+            Something went wrong.Try Reloading.
         </Container>
     )
-    {loading  && <Spinner/>}
+    {loading && <Spinner/>}
 
     return (
         <React.Fragment>
